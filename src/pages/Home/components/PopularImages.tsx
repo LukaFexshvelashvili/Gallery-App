@@ -67,6 +67,8 @@ export default function FetchPopularImages() {
                 alt: e.alt_description,
                 url: e.urls.full,
                 download: e.links.download,
+                // views არ მოდის API დან
+                info: { views: e.likes * 2, likes: e.likes },
               });
             }}
             key={`${e.id}${i}`}

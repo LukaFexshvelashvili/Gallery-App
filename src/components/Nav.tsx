@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Nav() {
   const [activeNav, setActiveNav] = useState<number>(0);
   useLayoutEffect(() => {
-    if (window.location.pathname == "/History") {
+    if (window.location.pathname == "/GalleryApp/History") {
       setActiveNav(1);
     }
   }, []);

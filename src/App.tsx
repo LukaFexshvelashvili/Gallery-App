@@ -10,6 +10,7 @@ type TfullImage = {
   alt: string;
   url: string;
   download: string;
+  info: { views: number; likes: number };
 };
 
 export type Tchache = {
