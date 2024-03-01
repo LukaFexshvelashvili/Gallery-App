@@ -3,7 +3,7 @@ import { HistoryIcon, HomeIcon } from "../assets/icons/icons";
 import { Link } from "react-router-dom";
 
 export default function Nav() {
-  const [activeNav, setActiveNav] = useState(0);
+  const [activeNav, setActiveNav] = useState<number>(0);
   useLayoutEffect(() => {
     if (window.location.pathname == "/History") {
       setActiveNav(1);

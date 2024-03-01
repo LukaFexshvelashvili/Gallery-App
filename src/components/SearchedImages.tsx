@@ -2,10 +2,10 @@ import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { client_id } from "../api/SecurityKeys";
 import Loader from "./Loader";
-import { chacheContext } from "../App";
+import { Tchache, chacheContext } from "../App";
 
 export default function SearchedImages(props: { word: string | null }) {
-  const chache = useContext(chacheContext);
+  const chache: Tchache = useContext(chacheContext);
   const [searchedImages, setSearchedImages] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [wholeLoading, setWholeLoading] = useState<boolean>(false);
@@ -24,14 +24,14 @@ export default function SearchedImages(props: { word: string | null }) {
   useEffect(() => {
     saveSearch.current = props.word;
     if (saveSearch.current) {
-      if (!chache.history.includes(saveSearch.current)) {
-        chache.setHistory((prevItems: string[]) => [
+      if (!chache?.history?.includes(saveSearch.current)) {
+        chache?.setHistory((prevItems: string[]) => [
           ...prevItems,
           saveSearch.current,
         ]);
       }
       // ამოწმებს ქეშირებულ დათას
-      if (chache.chache[saveSearch.current]) {
+      if (chache?.chache[saveSearch.current]) {
         let searchWord: any = saveSearch.current;
         setSearchedImages(() => [...chache.chache[searchWord]]);
       } else {
@@ -53,7 +53,7 @@ export default function SearchedImages(props: { word: string | null }) {
           if (saveSearch.current) {
             newChache[saveSearch.current] = response.data.results;
           }
-          chache.setChache((prevItems: any) => ({
+          chache?.setChache((prevItems: any) => ({
             ...prevItems,
             ...newChache,
           }));
@@ -119,7 +119,7 @@ export default function SearchedImages(props: { word: string | null }) {
               searchedImages.map((e: any, i: number) => (
                 <div
                   onClick={() => {
-                    chache.setFullImage({
+                    chache?.setFullImage({
                       alt: e.alt_description,
                       url: e.urls.full,
                       download: e.links.download,

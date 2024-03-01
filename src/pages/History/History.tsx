@@ -1,17 +1,19 @@
 import { useContext, useState } from "react";
-import { chacheContext } from "../../App";
+import { Tchache, chacheContext } from "../../App";
 import SearchedImages from "../../components/SearchedImages";
 import { TrashIcon } from "../../assets/icons/icons";
 
 export default function History() {
-  const chache = useContext(chacheContext);
+  const chache: Tchache = useContext(chacheContext);
   const [search, setSearch] = useState<null | string>(null);
 
   const removeFromHistory = (item: string) => {
-    let newHistory = chache.history.filter(
-      (elem: string) => !elem.includes(item)
-    );
-    chache.setHistory([...newHistory]);
+    if (chache && chache.history) {
+      let newHistory = chache.history.filter(
+        (elem: string) => !elem.includes(item)
+      );
+      chache.setHistory([...newHistory]);
+    }
   };
   return (
     <main className="mt-[50px]">
@@ -22,8 +24,8 @@ export default function History() {
               Last Searched
             </h1>
             <div className="flex flex-col w-full overflow-hidden mt-[20px] mobile:w-full">
-              {chache.history && chache.history.length > 0 ? (
-                chache.history.map((item: string, i: number) => (
+              {chache?.history && chache?.history.length > 0 ? (
+                chache?.history.map((item: string, i: number) => (
                   <div key={i} className="flex items-center relative">
                     <button
                       className={`text-start text-[15px] w-full  h-[40px] border-t-2 border-whiteHover transition-colors px-3  ${

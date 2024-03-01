@@ -2,14 +2,14 @@ import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { client_id } from "../../../api/SecurityKeys";
 import Loader from "../../../components/Loader";
-import { chacheContext } from "../../../App";
+import { Tchache, chacheContext } from "../../../App";
 
 export default function FetchPopularImages() {
   const [popularImages, setPopularImages] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const fetchTimes = useRef<boolean>(true);
   const giveLoad = useRef<boolean>(true);
-  const chache = useContext(chacheContext);
+  const chache: Tchache = useContext(chacheContext);
 
   const pages = useRef<number>(1);
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function FetchPopularImages() {
         {popularImages.map((e: any, i: number) => (
           <div
             onClick={() => {
-              chache.setFullImage({
+              chache?.setFullImage({
                 alt: e.alt_description,
                 url: e.urls.full,
                 download: e.links.download,
